@@ -23,7 +23,19 @@ def prepare_dataset(data_dir):
             metadata['image_name'].append(new_file_name)
             metadata['label'].append(ann['name'])
             crop_save_img(os.path.join(data_dir, ann_dict['filename']), new_file_name, ann['bndbox'])
-    df = pd.DataFrame(metadata).to_csv('metadata.csv')
+    metadata['split'] = split_dataser(len(metadata['label']))
+    df = pd.DataFrame(metadata).to_csv('metadata.csv', index=False)
+
+def split_dataser(ds_len):
+    test =  int(ds_len * 0.2)
+    split = ['test'] * test
+    train = int(ds_len * 0.7)
+    split.extend(['train'] * train)
+    val = ds_len - (test + train)
+    split.extend(['val'] * val)
+    random.shuffle(split)
+    return split
+
 
 def crop_save_img(file_path, new_name, bndbox):
     img = cv2.imread(file_path)
