@@ -10,11 +10,19 @@ import tensorflow as tf
 from pascal_voc_tools import XmlReader
 from collections import defaultdict
 
+labels = {
+    "a" : "0",
+    "e" : "1",
+    "i" : "2",
+    "o" : "3",
+    "u" : "4"
+}
+
 def prepare_dataset(data_dir):
     if not os.path.exists('image_files'):
         os.makedirs('image_files')
-    with open('Image_classifier/labels.json') as f:
-        labels = json.load(f)
+    #with open('labels.json') as f:
+    #    labels = json.load(f)
     pascal_dir = os.path.join(data_dir, 'outputs')
     pascal_list = [file for file in os.listdir(pascal_dir) if os.path.isfile(os.path.join(pascal_dir, file))]
     metadata = defaultdict(list)
