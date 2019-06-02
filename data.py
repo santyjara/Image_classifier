@@ -11,11 +11,11 @@ from pascal_voc_tools import XmlReader
 from collections import defaultdict
 
 labels = {
-    "a" : "0",
-    "e" : "1",
-    "i" : "2",
-    "o" : "3",
-    "u" : "4"
+    "a" : 0,
+    "e" : 1,
+    "i" : 2,
+    "o" : 3,
+    "u" : 4
 }
 
 def prepare_dataset(data_dir):
@@ -37,6 +37,11 @@ def prepare_dataset(data_dir):
             crop_save_img(os.path.join(data_dir, ann_dict['filename']), new_file_name, ann['bndbox'])
     metadata['split'] = split_dataset(len(metadata['label']))
     pd.DataFrame(metadata).to_csv('metadata.csv', index=False)
+    metadata = pd.DataFrame(metadata)
+    metadata1 = []
+    for _, value in labels.items():
+        metadata1.append(metadata.query("split == 'train' & label == " + str(value)).iloc[0]) 
+    pd.DataFrame((metadata1)).to_csv('metadata1.csv', index=False)
 
 def split_dataset(ds_len):
     test =  int(ds_len * 0.2)
