@@ -6,6 +6,7 @@ import json
 
 import pandas as pd
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 from pascal_voc_tools import XmlReader
 from collections import defaultdict
@@ -41,7 +42,7 @@ def prepare_dataset(data_dir):
     metadata1 = []
     for _, value in labels.items():
         metadata1.append(metadata.query("split == 'train' & label == " + str(value)).iloc[0]) 
-    pd.DataFrame((metadata1)).to_csv('metadata1.csv', index=False)
+    pd.DataFrame(metadata1).to_csv('metadata1.csv', index=False)
 
 def split_dataset(ds_len):
     test =  int(ds_len * 0.2)
@@ -128,6 +129,15 @@ def make_dataset(sources, training=False, batch_size=1,
     ds = ds.prefetch(1)
 
     return ds
+
+def imshow_batch_of_three(batch):
+    label_batch = batch[1].numpy()
+    image_batch = batch[0].numpy()
+    fig, axarr = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
+    for i in range(3):
+        img = image_batch[i, ...]
+        axarr[i].imshow(img)
+        axarr[i].set(xlabel='label = {}'.format(label_batch[i]))
 
 def augment_image(image):
     return image
