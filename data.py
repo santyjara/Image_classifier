@@ -144,27 +144,20 @@ def augment_image(image):
     return image
 
 def draw_result(H, N, val = False):
+    fig, axs = plt.subplots(2)
+    fig.suptitle('Training Loss and Accuracy on Dataset')
+    axs[0].plot(np.arange(0, N), H.history["loss"], label="train_loss")
     if(val):
-        fig, axs = plt.subplots(2)
-        fig.suptitle('Training Loss and Accuracy on Dataset')
-        axs[0].plot(np.arange(0, N), H.history["loss"], label="train_loss")
         axs[0].plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
-        axs[0].set_xlabel("Epoch #")
-        axs[0].set_ylabel("Loss")
-        axs[0].legend(loc="lower left")
-        axs[1].plot(np.arange(0, N), H.history["accuracy"], label="train_acc")
+    axs[0].set_xlabel("Epoch #")
+    axs[0].set_ylabel("Loss")
+    axs[0].legend(loc="lower left")
+    axs[1].plot(np.arange(0, N), H.history["accuracy"], label="train_acc")
+    if(val):
         axs[1].plot(np.arange(0, N), H.history["val_accuracy"], label="val_acc")
-        axs[1].set_xlabel("Epoch #")
-        axs[1].set_ylabel("Accuracy")
-        axs[1].legend(loc="lower left")
-    else:
-        plt.figure()
-        plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
-        plt.plot(np.arange(0, N), H.history["acc"], label="train_acc")
-        plt.title("Training Loss and Accuracy on Dataset")
-        plt.xlabel("Epoch #")
-        plt.ylabel("Loss/Accuracy")
-        plt.legend(loc="lower left")
+    axs[1].set_xlabel("Epoch #")
+    axs[1].set_ylabel("Accuracy")
+    axs[1].legend(loc="lower left")
 
 if __name__ == '__main__':
     import argparse
