@@ -1,15 +1,16 @@
 import os
 import sys
-import random
 import cv2
 import json 
+import random
 
+import numpy as np
 import pandas as pd
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
-from pascal_voc_tools import XmlReader
 from collections import defaultdict
+from pascal_voc_tools import XmlReader
 
 labels = {
     "a" : 0,
@@ -141,6 +142,19 @@ def imshow_batch_of_three(batch):
 
 def augment_image(image):
     return image
+
+def draw_result(H):
+    N = 500
+    plt.style.use("ggplot")
+    plt.figure()
+    plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
+    plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
+    plt.plot(np.arange(0, N), H.history["accuracy"], label="train_acc")
+    plt.plot(np.arange(0, N), H.history["val_accuracy"], label="val_acc")
+    plt.title("Training Loss and Accuracy on Dataset")
+    plt.xlabel("Epoch #")
+    plt.ylabel("Loss/Accuracy")
+    plt.legend(loc="lower left")
 
 if __name__ == '__main__':
     import argparse
