@@ -76,13 +76,13 @@ def build_sources_from_metadata(metadata, data_dir, mode='train', exclude_labels
     sources = list(zip(df['filepath'], df['label']))
     return sources
 
-def preprocess_image(image):
-    image = tf.image.resize(image, size=(32, 32))
+def preprocess_image(image, pixels):
+    image = tf.image.resize(image, size=(pixels, pixels))
     image = image / 255.0
     return image
 
 def make_dataset(sources, training=False, batch_size=1,
-    num_epochs=1, num_parallel_calls=1, shuffle_buffer_size=None):
+    num_epochs=1, num_parallel_calls=1, shuffle_buffer_size=None, pixels = 32):
     """
     Returns an operation to iterate over the dataset specified in sources
 
@@ -97,6 +97,7 @@ def make_dataset(sources, training=False, batch_size=1,
             map operations.
         shuffle_buffer_size (int): Number of elements from this dataset
             from which the new dataset will sample.
+        pixels (int): Size of the image after resize 
 
     Returns:
         A tf.data.Dataset object. It will return a tuple images of shape
@@ -120,7 +121,7 @@ def make_dataset(sources, training=False, batch_size=1,
         ds = ds.shuffle(shuffle_buffer_size)
     
     ds = ds.map(load, num_parallel_calls=num_parallel_calls)
-    ds = ds.map(lambda x,y: (preprocess_image(x), y))
+    ds = ds.map(lambda x,y: (preprocess_image(x, pixels), y))
     
     if training:
         ds = ds.map(lambda x,y: (augment_image(x), y))
