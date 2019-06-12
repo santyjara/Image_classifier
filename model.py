@@ -28,7 +28,7 @@ def get_alexnet_model(num_class):
     model.add(
         tf.keras.layers.Conv2D(
             filters=96, kernel_size=(11,11), activation='relu',
-            stride=(4,4), padding='valid', input_shape=(224, 224, 3)
+            strides=(4,4), padding='valid', input_shape=(224, 224, 3)
         )
     )
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
