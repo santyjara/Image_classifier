@@ -156,7 +156,7 @@ def get_google_net_model(num_class):
     x1 = tf.keras.layers.Flatten()(x1)
     x1 = tf.keras.layers.Dense(1024, activation='relu')(x1)
     x1 = tf.keras.layers.Dropout(0.7)(x1)
-    x1 = tf.keras.layers.Dense(10, activation='softmax', name='auxilliary_output_1')(x1)
+    x1 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_1')(x1)
 
     x = inception_module(x, 160, 112, 224, 24, 64, 64)
     x = inception_module(x, 128, 128, 256, 24, 64, 64)
@@ -167,7 +167,7 @@ def get_google_net_model(num_class):
     x2 = tf.keras.layers.Flatten()(x2)
     x2 = tf.keras.layers.Dense(1024, activation='relu')(x2)
     x2 = tf.keras.layers.Dropout(0.7)(x2)
-    x2 = tf.keras.layers.Dense(10, activation='softmax', name='auxilliary_output_2')(x2)
+    x2 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_2')(x2)
 
     x = inception_module(x, 256, 160, 320, 32, 128, 128)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
@@ -176,7 +176,7 @@ def get_google_net_model(num_class):
 
     x = tf.keras.layers.GlobalAveragePooling2D(name='avg_pool_5_3x3/1')(x)
     x = tf.keras.layers.Dropout(0.4)(x)
-    x = tf.keras.layers.Dense(10, activation='softmax', name='output')(x)
+    x = tf.keras.layers.Dense(num_class, activation='softmax', name='output')(x)
 
     return tf.keras.Model(input_layer, [x, x1, x2], name='inception_v1')
     
