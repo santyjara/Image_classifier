@@ -183,16 +183,16 @@ def get_google_net_model(num_class):
 
 def inception_module(layer_in, f1, f2_in, f2_out, f3_in, f3_out, f4_out):
 
-    conv1 = tf.keras.layersConv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
+    conv1 = tf.keras.layers.Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 
-    conv3 = tf.keras.layersConv2D(f2_in, (1,1), padding='same', activation='relu')(layer_in)
-    conv3 = tf.keras.layersConv2D(f2_out, (3,3), padding='same', activation='relu')(conv3)
+    conv3 = tf.keras.layers.Conv2D(f2_in, (1,1), padding='same', activation='relu')(layer_in)
+    conv3 = tf.keras.layers.Conv2D(f2_out, (3,3), padding='same', activation='relu')(conv3)
 
-    conv5 = tf.keras.layersConv2D(f3_in, (1,1), padding='same', activation='relu')(layer_in)
-    conv5 = tf.keras.layersConv2D(f3_out, (5,5), padding='same', activation='relu')(conv5)
+    conv5 = tf.keras.layers.Conv2D(f3_in, (1,1), padding='same', activation='relu')(layer_in)
+    conv5 = tf.keras.layers.Conv2D(f3_out, (5,5), padding='same', activation='relu')(conv5)
 
-    pool = tf.keras.layersMaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
-    pool = tf.keras.layersConv2D(f4_out, (1,1), padding='same', activation='relu')(pool)
+    pool = tf.keras.layers.MaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
+    pool = tf.keras.layers.Conv2D(f4_out, (1,1), padding='same', activation='relu')(pool)
 
-    layer_out = tf.keras.layersconcatenate([conv1, conv3, conv5, pool], axis=-1)
+    layer_out = tf.keras.layers.concatenate([conv1, conv3, conv5, pool], axis=-1)
     return layer_out
