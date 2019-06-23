@@ -50,8 +50,8 @@ def main(config):
         validation_data=valid_dataset, validation_steps=data['validation_steps'])
     
     #Save learning curve
-    draw_result(history_one, data['epochs_one'], data['model'] + "_one_" + str(datetime.datetime.now()))
-    draw_result(history, data['epochs'], data['model'] + "_" + str(datetime.datetime.now()), True)
+    draw_result(history_one, data['epochs_one'], data['model'] + "_one_" + str(datetime.date.today()))
+    draw_result(history, data['epochs'], data['model'] + "_" + str(datetime.date.today()), True)
     
 
 if __name__ == '__main__':

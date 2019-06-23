@@ -5,8 +5,8 @@
     "learning_rate" : 0.004,
     "validation_steps" : 2,
     "num_class" : 5,
-    "epochs_one" : 50,
-    "epochs" : 400,
-    "metadata" : "../metadata.csv",
-    "metadata1" : "../metadata1.csv"
+    "epochs_one" : 5,
+    "epochs" : 10,
+    "metadata" : "metadata.csv",
+    "metadata1" : "metadata1.csv"
 }

@@ -3,3 +3,5 @@ metadata.csv
 metadata1.csv
 .env
 settings.json
+/*.png
+*.pyc

@@ -159,7 +159,7 @@ def draw_result(H, N, name, val = False):
     axs[1].set_xlabel("Epoch #")
     axs[1].set_ylabel("Accuracy")
     axs[1].legend(loc="lower left")
-    plt.savefig(name)
+    plt.savefig(name + ".png")
 
 if __name__ == '__main__':
     import argparse
