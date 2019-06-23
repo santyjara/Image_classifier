@@ -144,7 +144,7 @@ def imshow_batch_of_three(batch):
 def augment_image(image):
     return image
 
-def draw_result(H, N, val = False):
+def draw_result(H, N, name, val = False):
     fig, axs = plt.subplots(2)
     fig.suptitle('Training Loss and Accuracy on Dataset')
     axs[0].plot(np.arange(0, N), H.history["loss"], label="train_loss")
@@ -159,6 +159,7 @@ def draw_result(H, N, val = False):
     axs[1].set_xlabel("Epoch #")
     axs[1].set_ylabel("Accuracy")
     axs[1].legend(loc="lower left")
+    plt.savefig(name)
 
 if __name__ == '__main__':
     import argparse
