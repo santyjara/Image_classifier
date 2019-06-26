@@ -177,6 +177,7 @@ def get_google_net_model(num_class):
     x = tf.keras.layers.Dense(num_class, activation='softmax', name='output')(x)
 
     return tf.keras.Model(input_layer, [x, x1, x2], name='inception_v1')
+    #return tf.keras.Model(input_layer, x, name='inception_v1')
     
 
 def inception_module(layer_in, f1, f2_in, f2_out, f3_in, f3_out, f4_out):

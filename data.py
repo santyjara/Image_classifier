@@ -82,7 +82,7 @@ def preprocess_image(image, pixels):
     return image
 
 def make_dataset(sources, training=False, batch_size=1,
-    num_epochs=1, num_parallel_calls=1, shuffle_buffer_size=None, pixels = 32):
+    num_epochs=1, num_parallel_calls=1, shuffle_buffer_size=None, pixels = 32, target = 1):
     """
     Returns an operation to iterate over the dataset specified in sources
 
@@ -126,6 +126,7 @@ def make_dataset(sources, training=False, batch_size=1,
     if training:
         ds = ds.map(lambda x,y: (augment_image(x), y))
         
+    ds = ds.map(lambda x, y: (x, tuple([y]*target) if target > 1 else y))
     ds = ds.repeat(count=num_epochs)
     ds = ds.batch(batch_size=batch_size)
     ds = ds.prefetch(1)
