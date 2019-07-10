@@ -30,8 +30,8 @@
         "validation_steps": 2,
         "num_class": 5,
         "target": 1,
-        "epochs_one": 200,
-        "epochs": 200,
+        "epochs_one": 20,
+        "epochs": 20,
         "metadata": "metadata.csv",
         "metadata1": "metadata1.csv"
     },
