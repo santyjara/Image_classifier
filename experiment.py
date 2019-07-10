@@ -12,7 +12,7 @@ models = {
     "google_net" : get_google_net_model
 }
 
-def main(config, model_name):
+def main(config, model_name, train='one'):
     with open(config) as json_file:  
         conf = json.load(json_file)
         conf = conf[model_name]
@@ -46,13 +46,19 @@ def main(config, model_name):
             metrics=['accuracy'])
 
     #Fit model
-    history_one = model.fit(x=train_one_dataset, epochs=conf['epochs_one'])
-    history = model.fit(x=train_dataset, epochs=conf['epochs'],
-        validation_data=valid_dataset, validation_steps=conf['validation_steps'])
+    if(type=='one'):
+        history_one = model.fit(x=train_one_dataset, epochs=conf['epochs_one'])
+        #Save learning curve
+        draw_result(history_one, conf['epochs_one'], model_name + "_one_" + str(datetime.date.today()))
+    else:
+        history = model.fit(x=train_dataset, epochs=conf['epochs'],
+            validation_data=valid_dataset, validation_steps=conf['validation_steps'])
+        #Save learning curve
+        draw_result(history, conf['epochs'], model_name + "_" + str(datetime.date.today()), True)
     
-    #Save learning curve
-    draw_result(history_one, conf['epochs_one'], model_name + "_one_" + str(datetime.date.today()))
-    draw_result(history, conf['epochs'], model_name + "_" + str(datetime.date.today()), True)
+    
+    
+    
     
 
 if __name__ == '__main__':
