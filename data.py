@@ -127,7 +127,8 @@ def make_dataset(sources, training=False, batch_size=1,
         ds = ds.map(lambda x,y: (augment_image(x), y))
         
     ds = ds.map(lambda x, y: (x, tuple([y]*target) if target > 1 else y))
-    ds = ds.repeat(count=num_epochs)
+    #ds = ds.repeat(count=None)
+    ds = ds.repeat()
     ds = ds.batch(batch_size=batch_size)
     ds = ds.prefetch(1)
 
