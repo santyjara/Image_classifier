@@ -46,7 +46,7 @@ def main(config, model_name, train='one'):
             metrics=['accuracy'])
 
     #Fit model
-    if(type=='one'):
+    if(train=='one'):
         history_one = model.fit(x=train_one_dataset, epochs=conf['epochs_one'])
         #Save learning curve
         draw_result(history_one, conf['epochs_one'], model_name + "_one_" + str(datetime.date.today()))
