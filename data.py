@@ -153,13 +153,13 @@ def draw_result(H, N, name, val = False):
             axs[0].plot(np.arange(0, N), H.history[key], label=key)
     axs[0].set_xlabel("Epoch #")
     axs[0].set_ylabel("Loss")
-    axs[0].legend(loc="lower left")
+    axs[0].legend(loc="lower right")
     for key, _ in H.history.items():
         if("accuracy" in key):
             axs[1].plot(np.arange(0, N), H.history[key], label=key)
     axs[1].set_xlabel("Epoch #")
     axs[1].set_ylabel("Accuracy")
-    axs[1].legend(loc="lower left")
+    axs[1].legend(loc="lower right")
     plt.savefig(name + ".png")
 
 if __name__ == '__main__':
