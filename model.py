@@ -69,68 +69,70 @@ def get_alexnet_model(num_class):
     return model
 
 def get_vgg16_model(num_class):
+    #spec = [64, 64, 128, 128, 256, 256, 512, 512, 512, 4096, 4096]
+    spec = [32, 32, 64, 64, 128, 128, 25, 256, 256, 2048, 2048]
     model = tf.keras.Sequential()
     model.add(
         tf.keras.layers.Conv2D(
-            filters=64, kernel_size=(3,3), activation='relu',
+            filters=spec[0], kernel_size=(3,3), activation='relu',
             padding='same', input_shape=(224, 224, 3)
         )
     )
     model.add(
         tf.keras.layers.Conv2D(
-            filters=64, kernel_size=(3,3), activation='relu',
+            filters=spec[1], kernel_size=(3,3), activation='relu',
             padding='same'
         )
     )
     model.add(tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=(2,2)))
     model.add(
         tf.keras.layers.Conv2D(
-            filters=128, kernel_size=(3,3), activation='relu',
+            filters=spec[2], kernel_size=(3,3), activation='relu',
             padding='same'
         )
     )
     model.add(
         tf.keras.layers.Conv2D(
-            filters=128, kernel_size=(3,3), activation='relu',
+            filters=spec[3], kernel_size=(3,3), activation='relu',
             padding='same'
         )
     )
     model.add(tf.keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2)))
     model.add(
         tf.keras.layers.Conv2D(
-            filters=256, kernel_size=(3,3), activation='relu',
+            filters=spec[4], kernel_size=(3,3), activation='relu',
             padding='same'
             )
     )
     model.add(
         tf.keras.layers.Conv2D(
-            filters=256, kernel_size=(3,3), activation='relu',
+            filters=spec[5], kernel_size=(3,3), activation='relu',
             padding='same'
             )
     )
     model.add(tf.keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2)))
     model.add(
         tf.keras.layers.Conv2D(
-            filters=512, kernel_size=(3,3), activation='relu',
+            filters=spec[6], kernel_size=(3,3), activation='relu',
             padding='same'
             )
     )
     model.add(
         tf.keras.layers.Conv2D(
-            filters=512, kernel_size=(3,3), activation='relu',
+            filters=spec[7], kernel_size=(3,3), activation='relu',
             padding='same'
             )
     )
     model.add(
         tf.keras.layers.Conv2D(
-            filters=512, kernel_size=(3,3), activation='relu',
+            filters=spec[8], kernel_size=(3,3), activation='relu',
             padding='same'
             )
     )
     model.add(tf.keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2)))
     model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(4096, activation='relu'))
-    model.add(tf.keras.layers.Dense(4096, activation='relu'))
+    model.add(tf.keras.layers.Dense(spec[9], activation='relu'))
+    model.add(tf.keras.layers.Dense(spec[10], activation='relu'))
     model.add(tf.keras.layers.Dense(num_class, activation='softmax'))
     return model
 
