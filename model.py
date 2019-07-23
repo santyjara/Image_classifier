@@ -70,7 +70,7 @@ def get_alexnet_model(num_class):
 
 def get_vgg16_model(num_class):
     #spec = [64, 64, 128, 128, 256, 256, 512, 512, 512, 4096, 4096]
-    spec = [8, 8, 16, 16, 32, 32, 64, 64, 64, 512, 512]
+    spec = [4, 4, 8, 8, 16, 16, 32, 32, 32, 256, 256]
     model = tf.keras.Sequential()
     model.add(
         tf.keras.layers.Conv2D(
