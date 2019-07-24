@@ -1,6 +1,4 @@
 /image_files
-metadata.csv
-metadata1.csv
 .env
 settings.json
 /*.png
