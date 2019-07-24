@@ -169,10 +169,10 @@ def get_google_net_model(num_class):
     # x2 = tf.keras.layers.Dropout(0.7)(x2)
     # x2 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_2')(x2)
 
-    x = inception_module(x, 256, 160, 320, 32, 128, 128)
-    x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
-    x = inception_module(x, 256, 160, 320, 32, 128, 128)
-    x = inception_module(x, 384, 192, 384, 48, 128, 128)
+    # x = inception_module(x, 256, 160, 320, 32, 128, 128)
+    # x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
+    # x = inception_module(x, 256, 160, 320, 32, 128, 128)
+    # x = inception_module(x, 384, 192, 384, 48, 128, 128)
 
     x = tf.keras.layers.GlobalAveragePooling2D(name='avg_pool_5_3x3/1')(x)
     x = tf.keras.layers.Dropout(0.4)(x)
