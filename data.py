@@ -143,6 +143,12 @@ def imshow_batch_of_three(batch):
         axarr[i].set(xlabel='label = {}'.format(label_batch[i]))
 
 def augment_image(image):
+    image = tf.image.random_brightness(image, max_delta=0.2)
+    image = tf.image.random_contrast(image, lower=0.5, upper=1.5)
+    image = tf.image.random_flip_left_right(image)
+    image = tf.image.random_flip_up_down(image)
+    image = tf.image.random_hue(image, max_delta=0.2)
+    image = tf.image.random_saturation(image, lower=0.5, upper=1.5)
     return image
 
 def draw_result(H, N, name, val = False):
