@@ -175,7 +175,7 @@ def get_google_net_model(num_class):
     x = inception_module(x, 95, 49, 96, 12, 32, 32)
 
     x = tf.keras.layers.GlobalAveragePooling2D(name='avg_pool_5_3x3/1')(x)
-    x = tf.keras.layers.Dropout(0.4)(x)
+    #x = tf.keras.layers.Dropout(0.4)(x)
     x = tf.keras.layers.Dense(num_class, activation='softmax', name='output')(x)
 
     #return tf.keras.Model(input_layer, [x, x1, x2], name='inception_v1')
