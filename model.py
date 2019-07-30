@@ -147,7 +147,7 @@ def get_google_net_model(num_class):
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_2_3x3/2')(x)
 
     x = inception_module(x, 64, 96, 128, 16, 32, 32)
-    x = inception_module(x, 128, 128, 192, 32, 96, 64)
+    #x = inception_module(x, 128, 128, 192, 32, 96, 64)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_3_3x3/2')(x)
     x = inception_module(x, 192, 96, 208, 16, 48, 64)
 
@@ -158,28 +158,28 @@ def get_google_net_model(num_class):
     x1 = tf.keras.layers.Dropout(0.7)(x1)
     x1 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_1')(x1)
 
-    # x = inception_module(x, 160, 112, 224, 24, 64, 64)
-    # x = inception_module(x, 128, 128, 256, 24, 64, 64)
-    # x = inception_module(x, 112, 144, 288, 32, 64, 64)
+    #x = inception_module(x, 160, 112, 224, 24, 64, 64)
+    #x = inception_module(x, 128, 128, 256, 24, 64, 64)
+    x = inception_module(x, 112, 144, 288, 32, 64, 64)
 
-    # x2 = tf.keras.layers.AveragePooling2D((5, 5), strides=3)(x)
-    # x2 = tf.keras.layers.Conv2D(128, (1, 1), padding='same', activation='relu')(x2)
-    # x2 = tf.keras.layers.Flatten()(x2)
-    # x2 = tf.keras.layers.Dense(1024, activation='relu')(x2)
-    # x2 = tf.keras.layers.Dropout(0.7)(x2)
-    # x2 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_2')(x2)
+    x2 = tf.keras.layers.AveragePooling2D((5, 5), strides=3)(x)
+    x2 = tf.keras.layers.Conv2D(128, (1, 1), padding='same', activation='relu')(x2)
+    x2 = tf.keras.layers.Flatten()(x2)
+    x2 = tf.keras.layers.Dense(1024, activation='relu')(x2)
+    x2 = tf.keras.layers.Dropout(0.7)(x2)
+    x2 = tf.keras.layers.Dense(num_class, activation='softmax', name='auxilliary_output_2')(x2)
 
-    # x = inception_module(x, 256, 160, 320, 32, 128, 128)
-    # x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
-    # x = inception_module(x, 256, 160, 320, 32, 128, 128)
-    # x = inception_module(x, 384, 192, 384, 48, 128, 128)
+    x = inception_module(x, 256, 160, 320, 32, 128, 128)
+    x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
+    #x = inception_module(x, 256, 160, 320, 32, 128, 128)
+    x = inception_module(x, 384, 192, 384, 48, 128, 128)
 
     x = tf.keras.layers.GlobalAveragePooling2D(name='avg_pool_5_3x3/1')(x)
     x = tf.keras.layers.Dropout(0.4)(x)
     x = tf.keras.layers.Dense(num_class, activation='softmax', name='output')(x)
 
-    #return tf.keras.Model(input_layer, [x, x1, x2], name='inception_v1')
-    return tf.keras.Model(input_layer, [x, x1], name='inception_v1')
+    return tf.keras.Model(input_layer, [x, x1, x2], name='inception_v1')
+    #return tf.keras.Model(input_layer, [x, x1], name='inception_v1')
 
 def inception_module(layer_in, f1, f2_in, f2_out, f3_in, f3_out, f4_out):
 
