@@ -140,13 +140,13 @@ def get_google_net_model(num_class):
 
     input_layer = tf.keras.layers.Input(shape=(224, 224, 3))
 
-    x = tf.keras.layers.Conv2D(32, (7, 7), padding='same', strides=(2, 2), activation='relu', name='conv_1_7x7/2')(input_layer)
+    x = tf.keras.layers.Conv2D(16, (7, 7), padding='same', strides=(2, 2), activation='relu', name='conv_1_7x7/2')(input_layer)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_1_3x3/2')(x)
-    x = tf.keras.layers.Conv2D(32, (1, 1), padding='same', strides=(1, 1), activation='relu', name='conv_2a_3x3/1')(x)
+    x = tf.keras.layers.Conv2D(16, (1, 1), padding='same', strides=(1, 1), activation='relu', name='conv_2a_3x3/1')(x)
     #x = tf.keras.layers.Conv2D(192, (3, 3), padding='same', strides=(1, 1), activation='relu', name='conv_2b_3x3/1')(x)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_2_3x3/2')(x)
 
-    x = inception_module(x, 32, 48, 64, 8, 16, 16)
+    x = inception_module(x, 16, 24, 32, 4, 8, 8)
     #x = inception_module(x, 128, 128, 192, 32, 96, 64)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_3_3x3/2')(x)
     #x = inception_module(x, 192, 96, 208, 16, 48, 64)
@@ -160,7 +160,7 @@ def get_google_net_model(num_class):
 
     #x = inception_module(x, 160, 112, 224, 24, 64, 64)
     #x = inception_module(x, 128, 128, 256, 24, 64, 64)
-    x = inception_module(x, 58, 77, 144, 16, 32, 32)
+    x = inception_module(x, 29, 35, 77, 8, 16, 16)
 
     # x2 = tf.keras.layers.AveragePooling2D((5, 5), strides=3)(x)
     # x2 = tf.keras.layers.Conv2D(128, (1, 1), padding='same', activation='relu')(x2)
@@ -172,7 +172,7 @@ def get_google_net_model(num_class):
     #x = inception_module(x, 256, 160, 320, 32, 128, 128)
     x = tf.keras.layers.MaxPool2D((3, 3), padding='same', strides=(2, 2), name='max_pool_4_3x3/2')(x)
     #x = inception_module(x, 256, 160, 320, 32, 128, 128)
-    x = inception_module(x, 192, 96, 192, 24, 64, 64)
+    x = inception_module(x, 95, 49, 96, 12, 32, 32)
 
     x = tf.keras.layers.GlobalAveragePooling2D(name='avg_pool_5_3x3/1')(x)
     x = tf.keras.layers.Dropout(0.4)(x)
