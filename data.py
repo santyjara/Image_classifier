@@ -48,7 +48,7 @@ def prepare_dataset(data_dir):
 def split_dataset(ds_len):
     test =  int(ds_len * 0.3)
     split = ['test'] * test
-    train = int(ds_len * 0.7)
+    train = int(ds_len * 0.6)
     split.extend(['train'] * train)
     val = ds_len - (test + train)
     split.extend(['val'] * val)
