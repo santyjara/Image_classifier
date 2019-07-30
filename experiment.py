@@ -23,7 +23,7 @@ def main(config, model_name, train='one'):
 
     train_sources = build_sources_from_metadata(metadata, 'image_files')
     valid_sources = build_sources_from_metadata(metadata, 'image_files', mode='val')
-    test_sources = build_sources_from_metadata(metadata, 'image_files', mode='test')
+    #test_sources = build_sources_from_metadata(metadata, 'image_files', mode='test')
 
     train_one_sources = build_sources_from_metadata(metadata1, 'image_files')
 
@@ -56,11 +56,6 @@ def main(config, model_name, train='one'):
         #Save learning curve
         draw_result(history, conf['epochs'], model_name + "_" + str(datetime.date.today()), True)
     
-    
-    
-    
-    
-
 if __name__ == '__main__':
     import argparse
 

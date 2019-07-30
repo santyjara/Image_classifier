@@ -46,7 +46,7 @@ def prepare_dataset(data_dir):
     pd.DataFrame(metadata1).to_csv('metadata1.csv', index=False)
 
 def split_dataset(ds_len):
-    test =  int(ds_len * 0.3)
+    test =  int(ds_len * 0.4)
     split = ['test'] * test
     train = int(ds_len * 0.6)
     split.extend(['train'] * train)
