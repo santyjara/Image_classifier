@@ -1,0 +1,5 @@
+/image_files
+.env
+settings.json
+/*.png
+*.pyc
